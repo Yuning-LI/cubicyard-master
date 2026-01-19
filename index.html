@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 
+        Version: 1.7 (Layout Hotfix)
+        Author: Your CTO Partner
+        Date: 2026-01-19
+        Changes: 
+        - Widened main calculator container from max-w-3xl to max-w-4xl to prevent input crowding/overlapping on desktop screens.
+        - Maintained clean UI structure.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Cubic Yard Calculator. Instantly calculate cubic yards for concrete, dirt, sand, and gravel projects. Accurate, mobile-friendly, and easy to use.">
+    <!-- Favicon: Embedded SVG for zero-dependency deployment -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b00'%3E%3Cpath stroke='none' d='M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'/%3E%3C/svg%3E">
+    
+    <title>CubicYard Master | Free Concrete & Dirt Volume Calculator</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Theme Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#ff6b00', // High-vis Orange
+                            600: '#e65100', // Deep Orange
+                        },
+                        dark: {
+                            800: '#1e293b', // Slate 800
+                            900: '#0f172a', // Slate 900
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Mobile Optimization */
+        input, select {
+            font-size: 16px !important;
+        }
+        
+        /* Smooth FAQ Animation */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: sweep .3s ease-in-out;
+        }
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-10px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }
+    </style>
+
+    <!-- JSON-LD Schema for SEO (Rich Snippets) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How do you calculate cubic yards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To calculate cubic yards, measure the length, width, and depth of your project in feet. Multiply these three numbers to get cubic feet, then divide by 27. Formula: (Length x Width x Depth) / 27."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How many bags of concrete do I need for 1 cubic yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One cubic yard of concrete weighs about 3,600-4,000 lbs. You will need approximately 45 bags of 80lb concrete mix or 60 bags of 60lb mix to make 1 cubic yard."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How much does a cubic yard of dirt cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One cubic yard of dirt will cover approximately 100 square feet at a depth of 3 inches, or 324 square feet at a depth of 1 inch."
+        }
+      }]
+    }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-dark-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <!-- Icon -->
+                <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
+                <span class="text-xl md:text-2xl font-bold tracking-wide">
+                    CubicYard <span class="text-brand-500">Master</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full max-w-5xl mx-auto px-4 py-8 md:py-12">
+        
+        <!-- Hero -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-dark-900 mb-4 tracking-tight">
+                Cubic Yard Calculator
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                Accurately estimate volume for <span class="font-semibold text-brand-600">concrete slabs, mulch beds, and gravel driveways</span>.
+            </p>
+        </div>
+
+        <!-- Calculator Interface -->
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden max-w-4xl mx-auto mb-16">
+            
+            <div class="bg-slate-100 px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+                <h2 class="font-bold text-lg text-dark-800 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    Project Dimensions
+                </h2>
+                <!-- Version badge removed for cleaner UI -->
+            </div>
+
+            <div class="p-6 md:p-8 space-y-8">
+                
+                <!-- Inputs Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Length -->
+                    <div class="space-y-2">
+                        <label for="length" class="block text-sm font-bold text-slate-700 uppercase tracking-wider">Length</label>
+                        <div class="flex gap-2 group">
+                            <!-- Added transition to input focus -->
+                            <input type="number" id="length" placeholder="0" class="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition shadow-sm text-lg" inputmode="decimal">
+                            <!-- Visual Upgrade: White bg, Brand Text, Hover Border -->
+                            <select id="lengthUnit" class="w-24 p-3 border border-slate-300 rounded-lg bg-white font-bold text-brand-600 focus:ring-2 focus:ring-brand-500 hover:border-brand-500 outline-none cursor-pointer transition shadow-sm">
+                                <option value="ft" selected>ft</option>
+                                <option value="in">in</option>
+                                <option value="yd">yd</option>
+                                <option value="m">m</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Width -->
+                    <div class="space-y-2">
+                        <label for="width" class="block text-sm font-bold text-slate-700 uppercase tracking-wider">Width</label>
+                        <div class="flex gap-2 group">
+                            <input type="number" id="width" placeholder="0" class="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition shadow-sm text-lg" inputmode="decimal">
+                            <!-- Visual Upgrade -->
+                            <select id="widthUnit" class="w-24 p-3 border border-slate-300 rounded-lg bg-white font-bold text-brand-600 focus:ring-2 focus:ring-brand-500 hover:border-brand-500 outline-none cursor-pointer transition shadow-sm">
+                                <option value="ft" selected>ft</option>
+                                <option value="in">in</option>
+                                <option value="yd">yd</option>
+                                <option value="m">m</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Depth -->
+                    <div class="space-y-2">
+                        <label for="height" class="block text-sm font-bold text-slate-700 uppercase tracking-wider">Depth</label>
+                        <div class="flex gap-2 group">
+                            <input type="number" id="height" placeholder="0" class="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition shadow-sm text-lg" inputmode="decimal">
+                            <!-- Visual Upgrade: Still defaults to 'in' for logic, but looks clickable -->
+                            <select id="heightUnit" class="w-24 p-3 border border-slate-300 rounded-lg bg-white font-bold text-brand-600 focus:ring-2 focus:ring-brand-500 hover:border-brand-500 outline-none cursor-pointer transition shadow-sm">
+                                <option value="in" selected>in</option> 
+                                <option value="ft">ft</option>
+                                <option value="yd">yd</option>
+                                <option value="m">m</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex flex-col md:flex-row gap-4 pt-2">
+                    <button id="calculateBtn" class="flex-1 bg-brand-600 hover:bg-brand-500 text-white text-lg font-bold py-4 px-6 rounded-xl shadow-lg shadow-brand-500/30 transition transform hover:-translate-y-1 active:translate-y-0 active:shadow-none">
+                        Calculate Volume
+                    </button>
+                    <button id="resetBtn" class="md:w-32 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-4 px-6 rounded-xl transition border border-slate-300">
+                        Clear
+                    </button>
+                </div>
+
+                <!-- Results -->
+                <div id="resultSection" class="hidden animate-fade-in border-t border-slate-200 pt-8 mt-4">
+                    <div class="bg-brand-50 rounded-xl p-6 border border-brand-100 text-center">
+                        <p class="text-brand-600 font-bold uppercase tracking-widest text-xs mb-2">Total Estimated Volume</p>
+                        
+                        <div class="flex items-baseline justify-center gap-2 mb-6">
+                            <span id="resultYards" class="text-6xl font-black text-dark-900">0.00</span>
+                            <span class="text-2xl font-bold text-slate-500">cu. yd.</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 border-t border-brand-200 pt-4">
+                            <div class="p-2">
+                                <span id="resultFeet" class="block text-xl font-bold text-dark-800">0.00</span>
+                                <span class="text-sm text-slate-500">Cubic Feet (ft³)</span>
+                            </div>
+                            <div class="p-2 border-l border-brand-200">
+                                <span id="resultMeters" class="block text-xl font-bold text-dark-800">0.00</span>
+                                <span class="text-sm text-slate-500">Cubic Meters (m³)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FAQ Section (SEO Optimized) -->
+        <section class="max-w-3xl mx-auto space-y-8">
+            <h2 class="text-3xl font-bold text-center text-dark-900 mb-8">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 - Default Open -->
+                <details class="group bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden cursor-pointer" open>
+                    <summary class="flex justify-between items-center font-bold text-lg p-6 text-dark-800 bg-slate-50 hover:bg-white transition select-none">
+                        How do I calculate cubic yards manually?
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 px-6 pb-6 pt-2 leading-relaxed">
+                        To calculate cubic yards, you first need to convert all your measurements (length, width, and depth) into feet. Multiply them together to get the total <strong>cubic feet</strong>, and then divide that number by <strong>27</strong>.
+                        <div class="mt-3 p-3 bg-brand-50 text-sm font-mono rounded text-brand-700">Formula: (L × W × H) ÷ 27</div>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="group bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-bold text-lg p-6 text-dark-800 bg-slate-50 hover:bg-white transition select-none">
+                        How many bags of concrete make a cubic yard?
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 px-6 pb-6 pt-2 leading-relaxed">
+                        It depends on the size of the bag. Generally, you need:
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li><strong>45 bags</strong> of 80lb concrete mix</li>
+                            <li><strong>60 bags</strong> of 60lb concrete mix</li>
+                            <li><strong>90 bags</strong> of 40lb concrete mix</li>
+                        </ul>
+                        Always order 5-10% extra for spillage or uneven ground.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="group bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden cursor-pointer">
+                    <summary class="flex justify-between items-center font-bold text-lg p-6 text-dark-800 bg-slate-50 hover:bg-white transition select-none">
+                        How much area does 1 cubic yard of mulch cover?
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-slate-600 px-6 pb-6 pt-2 leading-relaxed">
+                        Coverage depends on depth. One cubic yard covers:
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li><strong>324 sq. ft.</strong> at 1 inch deep</li>
+                            <li><strong>162 sq. ft.</strong> at 2 inches deep</li>
+                            <li><strong>108 sq. ft.</strong> at 3 inches deep (Recommended for weed control)</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 text-slate-400 py-12 mt-12">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <div class="mb-4">
+                <span class="text-xl font-bold text-white tracking-wide">CubicYard <span class="text-brand-500">Master</span></span>
+            </div>
+            <p class="text-sm mb-6">The trusted tool for contractors and homeowners.</p>
+            <div class="text-xs text-slate-500">
+                &copy; 2026 CubicYard Master. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Layer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const DOM = {
+                btnCalculate: document.getElementById('calculateBtn'),
+                btnReset: document.getElementById('resetBtn'),
+                inputs: {
+                    length: document.getElementById('length'),
+                    width: document.getElementById('width'),
+                    height: document.getElementById('height'),
+                    uLength: document.getElementById('lengthUnit'),
+                    uWidth: document.getElementById('widthUnit'),
+                    uHeight: document.getElementById('heightUnit')
+                },
+                results: {
+                    section: document.getElementById('resultSection'),
+                    yards: document.getElementById('resultYards'),
+                    feet: document.getElementById('resultFeet'),
+                    meters: document.getElementById('resultMeters')
+                }
+            };
+
+            const CONVERSION_RATES = {
+                'ft': 1,
+                'in': 1/12,
+                'yd': 3,
+                'm': 3.28084
+            };
+
+            function calculateVolume() {
+                const len = parseFloat(DOM.inputs.length.value);
+                const wid = parseFloat(DOM.inputs.width.value);
+                const hgt = parseFloat(DOM.inputs.height.value);
+
+                if (isNaN(len) || isNaN(wid) || isNaN(hgt)) {
+                    alert("Please enter valid numbers for all dimensions.");
+                    return;
+                }
+
+                const lenFt = len * CONVERSION_RATES[DOM.inputs.uLength.value];
+                const widFt = wid * CONVERSION_RATES[DOM.inputs.uWidth.value];
+                const hgtFt = hgt * CONVERSION_RATES[DOM.inputs.uHeight.value];
+
+                const cubicFeet = lenFt * widFt * hgtFt;
+                const cubicYards = cubicFeet / 27;
+                const cubicMeters = cubicFeet / 35.3147;
+
+                updateUI(cubicYards, cubicFeet, cubicMeters);
+            }
+
+            function updateUI(yards, feet, meters) {
+                DOM.results.yards.innerText = formatNumber(yards);
+                DOM.results.feet.innerText = formatNumber(feet);
+                DOM.results.meters.innerText = formatNumber(meters);
+
+                if (DOM.results.section.classList.contains('hidden')) {
+                    DOM.results.section.classList.remove('hidden');
+                    DOM.results.section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+
+            function resetCalculator() {
+                DOM.inputs.length.value = '';
+                DOM.inputs.width.value = '';
+                DOM.inputs.height.value = '';
+                DOM.results.section.classList.add('hidden');
+                DOM.inputs.length.focus();
+            }
+
+            function formatNumber(num) {
+                return num % 1 === 0 ? num : num.toFixed(2);
+            }
+
+            DOM.btnCalculate.addEventListener('click', calculateVolume);
+            DOM.btnReset.addEventListener('click', resetCalculator);
+
+            [DOM.inputs.length, DOM.inputs.width, DOM.inputs.height].forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') calculateVolume();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
