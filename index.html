@@ -2,17 +2,29 @@
 <html lang="en">
 <head>
     <!-- 
-        Version: 1.7 (Layout Hotfix)
+        Version: 1.8 (Analytics Integrated)
         Author: Your CTO Partner
-        Date: 2026-01-19
+        Date: 2026-01-20
         Changes: 
-        - Widened main calculator container from max-w-3xl to max-w-4xl to prevent input crowding/overlapping on desktop screens.
-        - Maintained clean UI structure.
+        - Integrated Google Analytics 4 (GA4) tracking code.
+        - ID: G-2Y97PFRQM6
+        - Ready for Google Search Console verification via GA method.
     -->
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2Y97PFRQM6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2Y97PFRQM6');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Free Cubic Yard Calculator. Instantly calculate cubic yards for concrete, dirt, sand, and gravel projects. Accurate, mobile-friendly, and easy to use.">
-    <!-- Favicon: Embedded SVG for zero-dependency deployment -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b00'%3E%3Cpath stroke='none' d='M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'/%3E%3C/svg%3E">
     
     <title>CubicYard Master | Free Concrete & Dirt Volume Calculator</title>
@@ -62,7 +74,7 @@
         }
     </style>
 
-    <!-- JSON-LD Schema for SEO (Rich Snippets) -->
+    <!-- JSON-LD Schema for SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -130,7 +142,6 @@
                     <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                     Project Dimensions
                 </h2>
-                <!-- Version badge removed for cleaner UI -->
             </div>
 
             <div class="p-6 md:p-8 space-y-8">
@@ -142,9 +153,7 @@
                     <div class="space-y-2">
                         <label for="length" class="block text-sm font-bold text-slate-700 uppercase tracking-wider">Length</label>
                         <div class="flex gap-2 group">
-                            <!-- Added transition to input focus -->
                             <input type="number" id="length" placeholder="0" class="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition shadow-sm text-lg" inputmode="decimal">
-                            <!-- Visual Upgrade: White bg, Brand Text, Hover Border -->
                             <select id="lengthUnit" class="w-24 p-3 border border-slate-300 rounded-lg bg-white font-bold text-brand-600 focus:ring-2 focus:ring-brand-500 hover:border-brand-500 outline-none cursor-pointer transition shadow-sm">
                                 <option value="ft" selected>ft</option>
                                 <option value="in">in</option>
@@ -159,7 +168,6 @@
                         <label for="width" class="block text-sm font-bold text-slate-700 uppercase tracking-wider">Width</label>
                         <div class="flex gap-2 group">
                             <input type="number" id="width" placeholder="0" class="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition shadow-sm text-lg" inputmode="decimal">
-                            <!-- Visual Upgrade -->
                             <select id="widthUnit" class="w-24 p-3 border border-slate-300 rounded-lg bg-white font-bold text-brand-600 focus:ring-2 focus:ring-brand-500 hover:border-brand-500 outline-none cursor-pointer transition shadow-sm">
                                 <option value="ft" selected>ft</option>
                                 <option value="in">in</option>
@@ -174,7 +182,6 @@
                         <label for="height" class="block text-sm font-bold text-slate-700 uppercase tracking-wider">Depth</label>
                         <div class="flex gap-2 group">
                             <input type="number" id="height" placeholder="0" class="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition shadow-sm text-lg" inputmode="decimal">
-                            <!-- Visual Upgrade: Still defaults to 'in' for logic, but looks clickable -->
                             <select id="heightUnit" class="w-24 p-3 border border-slate-300 rounded-lg bg-white font-bold text-brand-600 focus:ring-2 focus:ring-brand-500 hover:border-brand-500 outline-none cursor-pointer transition shadow-sm">
                                 <option value="in" selected>in</option> 
                                 <option value="ft">ft</option>
@@ -221,12 +228,11 @@
             </div>
         </div>
 
-        <!-- FAQ Section (SEO Optimized) -->
+        <!-- FAQ Section -->
         <section class="max-w-3xl mx-auto space-y-8">
             <h2 class="text-3xl font-bold text-center text-dark-900 mb-8">Frequently Asked Questions</h2>
             
             <div class="space-y-4">
-                <!-- FAQ Item 1 - Default Open -->
                 <details class="group bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden cursor-pointer" open>
                     <summary class="flex justify-between items-center font-bold text-lg p-6 text-dark-800 bg-slate-50 hover:bg-white transition select-none">
                         How do I calculate cubic yards manually?
@@ -240,7 +246,6 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 2 -->
                 <details class="group bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden cursor-pointer">
                     <summary class="flex justify-between items-center font-bold text-lg p-6 text-dark-800 bg-slate-50 hover:bg-white transition select-none">
                         How many bags of concrete make a cubic yard?
@@ -259,7 +264,6 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 3 -->
                 <details class="group bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden cursor-pointer">
                     <summary class="flex justify-between items-center font-bold text-lg p-6 text-dark-800 bg-slate-50 hover:bg-white transition select-none">
                         How much area does 1 cubic yard of mulch cover?
