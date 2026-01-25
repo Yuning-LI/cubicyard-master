@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <!-- 
-        Version: 2.1 (SEO & Schema Fix)
+        Version: 2.2 (Semrush Audit Fix)
         Author: Your CTO Partner
-        Date: 2026-01-25
+        Date: 2026-01-26
         Changes: 
-        - Fixed Semrush "Invalid Structured Data" error.
-        - Restored FAQPage Schema (Critical for SEO snippets).
-        - Enhanced SoftwareApplication Schema with required fields.
-        - Maintained Price Estimator & Cylinder Mode logic.
+        - Split JSON-LD Schema into separate blocks to fix validation errors.
+        - Added required 'image' field to WebApplication Schema.
+        - Added 'Back to Top' link to address internal linking warning.
     -->
     
     <!-- Google tag (gtag.js) -->
@@ -25,7 +24,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Advanced Cubic Yard Calculator. Calculate volume for Rectangles & Cylinders. Estimate Cost and Weight for Concrete, Dirt, Sand, and Gravel. Free & Professional.">
-    <!-- Canonical Tag (Good practice) -->
+    <!-- Canonical Tag -->
     <link rel="canonical" href="https://www.calculatecubicyard.com/" />
     
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b00'%3E%3Cpath stroke='none' d='M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'/%3E%3C/svg%3E">
@@ -70,60 +69,64 @@
         .prose td { border-bottom: 1px solid #e2e8f0; padding: 0.75em; color: #475569; }
         .toggle-checkbox:checked { right: 0; border-color: #ff6b00; }
         .toggle-checkbox:checked + .toggle-label { background-color: #ff6b00; }
+        html { scroll-behavior: smooth; }
     </style>
 
-    <!-- FIXED & COMBINED SCHEMA (SoftwareApp + FAQPage) -->
+    <!-- SCHEMA 1: WebApplication (Fixed 'image' error) -->
     <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "CubicYard Master Calculator",
-        "url": "https://www.calculatecubicyard.com",
-        "applicationCategory": "Utility",
-        "operatingSystem": "Any",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "featureList": "Calculate cubic yards for rectangles and cylinders, estimate material cost, estimate weight for concrete and dirt."
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CubicYard Master Calculator",
+      "url": "https://www.calculatecubicyard.com",
+      "image": "https://www.calculatecubicyard.com/favicon.ico", 
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [{
-          "@type": "Question",
-          "name": "How do you calculate cubic yards manually?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "To calculate cubic yards, measure the length, width, and depth of your project in feet. Multiply these three numbers to get cubic feet, then divide by 27. Formula: (Length x Width x Depth) / 27."
-          }
-        }, {
-          "@type": "Question",
-          "name": "How many bags of concrete do I need for 1 cubic yard?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "One cubic yard of concrete weighs about 3,600-4,000 lbs. You will need approximately 45 bags of 80lb concrete mix or 60 bags of 60lb mix to make 1 cubic yard."
-          }
-        }, {
-          "@type": "Question",
-          "name": "How much does a cubic yard of dirt cover?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "One cubic yard of dirt will cover approximately 100 square feet at a depth of 3 inches, or 324 square feet at a depth of 1 inch."
-          }
-        }]
-      }
-    ]
+      "featureList": "Calculate cubic yards for rectangles and cylinders, estimate material cost, estimate weight."
+    }
+    </script>
+
+    <!-- SCHEMA 2: FAQPage (Separated for safety) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How do you calculate cubic yards manually?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To calculate cubic yards, measure the length, width, and depth of your project in feet. Multiply these three numbers to get cubic feet, then divide by 27. Formula: (Length x Width x Depth) / 27."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How many bags of concrete do I need for 1 cubic yard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One cubic yard of concrete weighs about 3,600-4,000 lbs. You will need approximately 45 bags of 80lb concrete mix or 60 bags of 60lb mix to make 1 cubic yard."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How much does a cubic yard of dirt cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One cubic yard of dirt will cover approximately 100 square feet at a depth of 3 inches, or 324 square feet at a depth of 1 inch."
+        }
+      }]
+    }
     </script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col" id="top">
 
     <!-- Header -->
     <header class="bg-dark-900 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.reload()">
                 <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                 </svg>
@@ -432,6 +435,7 @@
 
     <footer class="bg-dark-900 text-slate-400 py-12 mt-12 text-center">
         <p class="text-sm">© 2026 CubicYard Master. All rights reserved.</p>
+        <p class="text-xs mt-2"><a href="#top" class="hover:text-white transition">Back to Top</a></p>
     </footer>
 
     <!-- LOGIC CORE V2.1 -->
