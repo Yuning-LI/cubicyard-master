@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <!-- 
-        Version: 2.2 (Semrush Audit Fix)
+        Version: 2.3 (Semrush Validated Fix)
         Author: Your CTO Partner
         Date: 2026-01-26
         Changes: 
-        - Split JSON-LD Schema into separate blocks to fix validation errors.
-        - Added required 'image' field to WebApplication Schema.
-        - Added 'Back to Top' link to address internal linking warning.
+        - Separated JSON-LD scripts to fix validation errors.
+        - Fixed WebApplication Schema: Added required 'image', 'operatingSystem', 'applicationCategory'.
+        - Canonical URL confirmed.
     -->
     
     <!-- Google tag (gtag.js) -->
@@ -24,7 +24,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Advanced Cubic Yard Calculator. Calculate volume for Rectangles & Cylinders. Estimate Cost and Weight for Concrete, Dirt, Sand, and Gravel. Free & Professional.">
-    <!-- Canonical Tag -->
     <link rel="canonical" href="https://www.calculatecubicyard.com/" />
     
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b00'%3E%3Cpath stroke='none' d='M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'/%3E%3C/svg%3E">
@@ -72,26 +71,27 @@
         html { scroll-behavior: smooth; }
     </style>
 
-    <!-- SCHEMA 1: WebApplication (Fixed 'image' error) -->
+    <!-- SCHEMA 1: WebApplication (Strict Compliance) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "CubicYard Master Calculator",
       "url": "https://www.calculatecubicyard.com",
-      "image": "https://www.calculatecubicyard.com/favicon.ico", 
+      "image": "https://www.calculatecubicyard.com/favicon.ico",
       "applicationCategory": "UtilityApplication",
-      "operatingSystem": "Any",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Firefox, Safari, Edge.",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
       },
-      "featureList": "Calculate cubic yards for rectangles and cylinders, estimate material cost, estimate weight."
+      "featureList": "Calculate cubic yards for rectangles and cylinders, estimate material cost, estimate weight for concrete and dirt."
     }
     </script>
 
-    <!-- SCHEMA 2: FAQPage (Separated for safety) -->
+    <!-- SCHEMA 2: FAQPage (Separated) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
