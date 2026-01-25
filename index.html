@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <!-- 
-        Version: 2.0 (The "Game Changer" Update)
+        Version: 2.1 (SEO & Schema Fix)
         Author: Your CTO Partner
-        Date: 2026-01-20
+        Date: 2026-01-25
         Changes: 
-        - Added Price Estimator (Total Cost Calculation).
-        - Added Cylinder Mode (for Columns/Post Holes) with Toggle Switch.
-        - Added Weight Estimator based on material density (Concrete, Dirt, etc.).
-        - Refined UI with Tabbed Interface for shape selection.
-        - Maintained all previous SEO content and Analytics.
+        - Fixed Semrush "Invalid Structured Data" error.
+        - Restored FAQPage Schema (Critical for SEO snippets).
+        - Enhanced SoftwareApplication Schema with required fields.
+        - Maintained Price Estimator & Cylinder Mode logic.
     -->
     
     <!-- Google tag (gtag.js) -->
@@ -26,6 +25,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Advanced Cubic Yard Calculator. Calculate volume for Rectangles & Cylinders. Estimate Cost and Weight for Concrete, Dirt, Sand, and Gravel. Free & Professional.">
+    <!-- Canonical Tag (Good practice) -->
+    <link rel="canonical" href="https://www.calculatecubicyard.com/" />
+    
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b00'%3E%3Cpath stroke='none' d='M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'/%3E%3C/svg%3E">
     
     <title>CubicYard Master | Volume, Cost & Weight Calculator</title>
@@ -63,36 +65,57 @@
     
     <style>
         input, select { font-size: 16px !important; }
-        
-        /* Custom Scrollbar for nicer tables */
         .prose table { width: 100%; text-align: left; margin-top: 2em; margin-bottom: 2em; border-collapse: collapse; }
         .prose th { border-bottom: 2px solid #e2e8f0; padding: 0.75em; font-weight: 700; color: #1e293b; }
         .prose td { border-bottom: 1px solid #e2e8f0; padding: 0.75em; color: #475569; }
-
-        /* Toggle Switch Styles */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #ff6b00;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #ff6b00;
-        }
+        .toggle-checkbox:checked { right: 0; border-color: #ff6b00; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #ff6b00; }
     </style>
 
+    <!-- FIXED & COMBINED SCHEMA (SoftwareApp + FAQPage) -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "CubicYard Master Calculator",
-      "applicationCategory": "ConstructionApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CubicYard Master Calculator",
+        "url": "https://www.calculatecubicyard.com",
+        "applicationCategory": "Utility",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": "Calculate cubic yards for rectangles and cylinders, estimate material cost, estimate weight for concrete and dirt."
       },
-      "featureList": "Calculate cubic yards for rectangles and cylinders, estimate material cost, estimate weight for concrete and dirt."
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+          "@type": "Question",
+          "name": "How do you calculate cubic yards manually?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To calculate cubic yards, measure the length, width, and depth of your project in feet. Multiply these three numbers to get cubic feet, then divide by 27. Formula: (Length x Width x Depth) / 27."
+          }
+        }, {
+          "@type": "Question",
+          "name": "How many bags of concrete do I need for 1 cubic yard?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One cubic yard of concrete weighs about 3,600-4,000 lbs. You will need approximately 45 bags of 80lb concrete mix or 60 bags of 60lb mix to make 1 cubic yard."
+          }
+        }, {
+          "@type": "Question",
+          "name": "How much does a cubic yard of dirt cover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One cubic yard of dirt will cover approximately 100 square feet at a depth of 3 inches, or 324 square feet at a depth of 1 inch."
+          }
+        }]
+      }
+    ]
     </script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
@@ -407,20 +430,11 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark-900 text-slate-400 py-12 mt-12">
-        <div class="max-w-5xl mx-auto px-4 text-center">
-            <div class="mb-4">
-                <span class="text-xl font-bold text-white tracking-wide">CubicYard <span class="text-brand-500">Master</span></span>
-            </div>
-            <p class="text-sm mb-6">The trusted tool for contractors and homeowners.</p>
-            <div class="text-xs text-slate-500">
-                &copy; 2026 CubicYard Master. All rights reserved.
-            </div>
-        </div>
+    <footer class="bg-dark-900 text-slate-400 py-12 mt-12 text-center">
+        <p class="text-sm">© 2026 CubicYard Master. All rights reserved.</p>
     </footer>
 
-    <!-- Logic Layer -->
+    <!-- LOGIC CORE V2.1 -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
