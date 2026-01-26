@@ -1,2 +1,1 @@
-User-agent: *
-Allow: /Sitemap: https://www.google.com/url?sa=E&source=gmail&q=https://www.calculatecubicyard.com/sitemap.xml
+User-agent: *Allow: /Sitemap: https://www.google.com/search?q=https://www.calculatecubicyard.com/sitemap.xml

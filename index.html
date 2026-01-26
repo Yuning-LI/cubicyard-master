@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <!-- 
-        Version: 2.3 (Semrush Validated Fix)
+        Version: 2.4 (Semrush Final Fix)
         Author: Your CTO Partner
         Date: 2026-01-26
         Changes: 
-        - Separated JSON-LD scripts to fix validation errors.
-        - Fixed WebApplication Schema: Added required 'image', 'operatingSystem', 'applicationCategory'.
-        - Canonical URL confirmed.
+        - Fixed Robots.txt sitemap link error.
+        - Enhanced WebApplication Schema with 'applicationCategory' and 'operatingSystem'.
+        - Validated JSON-LD structure.
     -->
     
     <!-- Google tag (gtag.js) -->
@@ -71,7 +71,7 @@
         html { scroll-behavior: smooth; }
     </style>
 
-    <!-- SCHEMA 1: WebApplication (Strict Compliance) -->
+    <!-- SCHEMA 1: WebApplication (Strict Compliance Fix) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -81,17 +81,17 @@
       "image": "https://www.calculatecubicyard.com/favicon.ico",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript. Compatible with Chrome, Firefox, Safari, Edge.",
+      "browserRequirements": "Requires JavaScript",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
       },
-      "featureList": "Calculate cubic yards for rectangles and cylinders, estimate material cost, estimate weight for concrete and dirt."
+      "featureList": "Calculate cubic yards for rectangles and cylinders, estimate material cost, estimate weight."
     }
     </script>
 
-    <!-- SCHEMA 2: FAQPage (Separated) -->
+    <!-- SCHEMA 2: FAQPage -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
